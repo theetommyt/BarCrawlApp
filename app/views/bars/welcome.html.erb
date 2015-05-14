@@ -1,17 +1,16 @@
 
 
-<ul id='headline'><h1>Where are you starting the Choose your own Disaster Bar Crawl?</h1></ul>
-<button type="button" id="getLocation">We're finna start here</button>
-<input id="location_search" placeholder="enter address with zip code"><button id="location_searchBtn">Start my search here!</button>
-<h2 id='position'></h2>
-<div id="bracket"></div>
-<div id="crawl_list"></div>
+<h1 id="headline">Where are you starting the Choose your own Disaster Bar Crawl?</h1>
 
-<!-- <%= form_tag("/bar_crawl", method: "get") do %>
-  <%= label_tag(:num_stops, "How many bars you finna hit?") %>
-  <%= text_field_tag(:num_stops) %>
-  <%= submit_tag("Search") %>
-<% end %> -->
+<button type="button" id="getLocation">We're finna start here</button>
+<input type="text" id="location_search" placeholder="enter address with zip code"><button id="location_searchBtn">Start my search here!</button>
+
+  <h2 id='position'></h2>
+    <div id="bracket"></div>
+
+  <div>
+    <ol id="crawl_list"></ol>
+  </div>
 
 
 
@@ -40,7 +39,7 @@ app.getBarsAndRender = function(lat, long) {
             var local_h3 = h3;
             var local_bar_name = bar_name;
             $(local_h3).dblclick( function(event){
-              $('#crawl_list').append(local_bar_name);
+              $('#crawl_list').append('<li>' + local_bar_name + '</li>');
             });
           })();
 
