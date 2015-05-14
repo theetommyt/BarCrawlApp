@@ -1,0 +1,127 @@
+
+
+<ul id='headline'><h1>Where are you starting the Choose your own Disaster Bar Crawl?</h1></ul>
+<button type="button" id="getLocation">We're finna start here</button>
+<input id="location_search" placeholder="enter address with zip code"><button id="location_searchBtn">Start my search here!</button>
+<h2 id='position'></h2>
+<div id="bracket"></div>
+<div id="crawl_list"></div>
+
+<!-- <%= form_tag("/bar_crawl", method: "get") do %>
+  <%= label_tag(:num_stops, "How many bars you finna hit?") %>
+  <%= text_field_tag(:num_stops) %>
+  <%= submit_tag("Search") %>
+<% end %> -->
+
+
+
+
+<script type="text/javascript">
+var app = app || {};
+
+app.getBarsAndRender = function(lat, long) {
+  $.ajax({
+    url: '/bar_crawl',
+    dataType: "json",
+    method: 'post',
+    data: { lat: lat, long: long},
+    success:function(data){
+      $('.bar_row').empty();
+      for (var i = 0; i < data.bracket.length; i++) {
+        var row = $('<div>').addClass('bar-row')
+        for (var j = 0; j < data.bracket[i].length; j++) {
+          var bar_name = data.bracket[i][j].name
+          var h3 = $('<span>').addClass('bar').text(bar_name);
+          $(h3).on('click', function(event) {
+            $(this).toggleClass("yesBar");
+          });
+
+          (function(){
+            var local_h3 = h3;
+            var local_bar_name = bar_name;
+            $(local_h3).dblclick( function(event){
+              $('#crawl_list').append(local_bar_name);
+            });
+          })();
+
+          row.append(h3);
+
+        }
+        $('#bracket').append(row);
+      }
+    }
+  });
+}
+
+$("#getLocation").click(function() {
+
+  var latitude, longitude;
+  navigator.geolocation.watchPosition(function(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    var html = "Your Current Location is Lat: " + latitude + "    Long: " + longitude;
+    $('#position').html(html);
+    app.getBarsAndRender(latitude, longitude);
+
+
+  });
+
+});
+
+$("#location_searchBtn").click(function() {
+
+  var location = $('#location_search').val();
+
+  $.ajax({
+    url: '/geolocation_getter',
+    dataType: "json",
+    method: 'post',
+    data: { location: location },
+    success:function(data){
+      app.getBarsAndRender(data.latitude, data.longitude);
+    },
+    error: function(err) {
+    	console.log(err);
+    }
+});
+
+
+
+});
+
+
+
+
+</script>
+
+<!-- ******************
+DrunkChat -->
+
+<html>
+  <head>
+    <title>DrunkChat</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+  </head>
+  <body>
+
+    <h1>Wanna DrunkChat? No Ragrets! Yolo, Yo.</h1>
+
+    <h2>First time, Drinker? Sign up!</h2>
+    <!-- form for sign-up: to make a new drinker -->
+    <form action="/drinkers" method='post'>
+      <input type="text" name='drinker[drinkername]' placeholder='...drinkername'>
+      <input type="password" name='!password' placeholder='...password'>
+      <input type="submit" value='Sign-Up'>
+    </form>
+
+    <h3>Veteran Drinker? Sign in!</h3>
+    <!-- form for sign-in: to make a new session -->
+    <form action="/sessions" method='post'>
+      <input type="text" name='drinkername' placeholder='...drinkername'>
+      <input type="password" name='password' placeholder='...password'>
+      <input type="submit" value='Sign-In'>
+    </form>
+
+
+  </body>
+</html>

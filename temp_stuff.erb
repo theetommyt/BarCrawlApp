@@ -1,0 +1,48 @@
+
+
+
+<h1 id='headline'>Hi internet and non-internet friends.</h1>
+
+<h2 id='position'></h2>
+
+<%= form_tag("/closest_bars", method: "get") do %>
+  <%= label_tag(:num_stops, "How many bars you finna hit?") %>
+  <%= text_field_tag(:num_stops) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+
+
+<script type="text/javascript">
+
+  var latitude, longitude;
+
+  navigator.geolocation.watchPosition(function(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    var html = "Lat: " + latitude + "    Long: " + longitude;
+    $('#position').html(html);
+
+
+  $('form').submit(function(event){
+    event.preventDefault();
+    number = $("#num_stops").val();
+
+    $.ajax({
+      url: '/closest_bars',
+      data: {lat: latitude, long: longitude, num_stops: number },
+      method: 'post',
+      success:function(bars){
+        console.log(bars)
+
+        for (var i = 0; i < bars.length; i++) {
+          $('#headline').append(" You are near " + bars[i].name + " and ");
+        }
+
+      }
+    })
+  })
+
+  })
+
+</script>

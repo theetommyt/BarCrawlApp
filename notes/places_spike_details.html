@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+var map;
+var infowindow;
+
+var active = active || {};
+active.markers = [];
+
+function initialize() {
+  var chicago = new google.maps.LatLng(41.8905500,-87.6268470);
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: chicago,
+    zoom: 15
+  });
+
+  var request = {
+    location: chicago,
+    radius: 500,
+    types: ['bar', 'pub', 'tavern','bars']
+  };
+  infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.getNearby(request, callback);
+}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+}
+
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+  active.markers.push(marker);
+
+  var markerLocation = active.length - 1;
+
+  google.maps.event.addListener(marker, 'click', function() {
+    $("#bar_list").html('');
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+    //want to add place info but refresh when another bar is clicked
+    $('#bar_list').append(place.name, place.);
+    console.log("hi")
+  });
+
+  google.maps.event.addListener(marker, 'dblclick', function() {
+    $('#crawl_list').append(place.form);
+
+    console.log("insert code to add info below to div");
+    scopeHelper(marker);
+  });
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+function scopeHelper(scopeObj) {
+  console.log(scopeObj);
+}
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas" style="width: 90%; height: 500px; margin-top: 20px; margin-left: 5%; margin-right: 5%;"></div>
+    <div id="list" style="width: 90%; margin: 0 auto;"></div>
+
+    <h1>About Bar</h1>
+    <div id="bar_list">
+    </div>
+
+    <h1>Current Crawl</h1>
+    <ul id="crawl_list">
+    </ul>
+
+  </body>
+</html>

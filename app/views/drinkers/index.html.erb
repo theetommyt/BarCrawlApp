@@ -1,0 +1,10 @@
+<h3>DrunkChat: Drinkers and Messages</h3>
+<ul>
+  <% @drinkers.each do |drinker| %>
+    <li>
+      <%= drinker.name %>
+      <br>
+      <%= drinker.message %>
+    </li>
+  <% end %>
+</ul>

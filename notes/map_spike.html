@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>racks ajax</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h3> Enter Destination: </h3>
+
+      address search box -->
+       <div>
+      <input id="address" type="textbox" value="Chicago, IL">
+      <input type="button" value="Bar hop" onclick="codeAddress()">
+      </div>
+
+      <div id="map" style="width: 500px; height: 400px;"></div>
+
+      <!--      Find lat and long based on address     -->
+
+    </div>
+
+    <!--       Add geolocation function as well, ask if want to geolocate?       -->
+
+    <script type="text/javascript">
+
+      var defaultCenter = new google.maps.LatLng(41.893974, -87.627945);
+
+      var defaultOptions = {
+        zoom: 14,
+        center: defaultCenter,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      var map = new google.maps.Map(document.getElementById('map'), defaultOptions);
+
+      var infowindow = new google.maps.InfoWindow();
+
+// ***USE THIS IF YOU WANT TO ENABLE THE USER TO TYPE IN THEIR ADDRESS AND CENTER THE MAP ON IT***
+      var geocoder = new google.maps.Geocoder();
+
+      function codeAddress() {
+        var address = document.getElementById("address").value;
+        geocoder.geocode( { 'address': address}, function(results, status) {
+          console.log(results[0].geometry.location);
+          if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            map.setZoom(16);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+          } else {
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+        });
+      }
+
+
+// ************Add our bar crawl function that populates this map
+
+
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent("Stop #" +locations[i].doing_business_as_name + " "+ locations[i].address);
+
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+
+        };
+    });
+
+
+////// FIND A WAY TO USE ROUTING BASED ON BAR CRAWL LIST WITH DIRECTIONS API
+
+
+
+  </script>
+  </body>
+</html>
