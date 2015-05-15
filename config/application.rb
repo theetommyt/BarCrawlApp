@@ -17,7 +17,7 @@ Bundler.require(*Rails.groups)
 
 Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
       config.assets.paths << path
-  end
+end
 
 module BarCrawl
   class Application < Rails::Application
