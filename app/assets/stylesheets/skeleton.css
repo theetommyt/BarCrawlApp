@@ -1,45 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-body {
-  background-image: url('http://newartcolorz.com/images/bar-wallpaper/kartandtinki1_bar-wallpaper_06.jpg');
-}
-
-.bar{
-  border: 1px solid red;
-  padding: 1em;
-  background-color: blue;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.bar-row.two.columns{
-  border: 2px solid green;
-  padding: 1em;
-  background-color: rgba(255,255,255,0.5);
-  width: 90%;
-  border-radius: 5px;
-}
-
-.yesBar {
-  background-color: red;
-}
-
-
-/*
 * Skeleton V2.0.4
 * Copyright 2014, Dave Gamache
 * www.getskeleton.com
