@@ -13,7 +13,7 @@ class DrinkersController < ApplicationController
   end
   def create
     drinker = Drinker.create ( drinker_params )
-    redirect_to "/drinkers/#{ drinker.id }"
+    redirect_to "/"
   end
 
   def edit
@@ -22,7 +22,7 @@ class DrinkersController < ApplicationController
   def update
     drinker = Drinker.find(params[:id])
     drinker.update!( drinker_params )
-    redirect_to "/drinkers/#{ drinker.id }"
+    redirect_to "/"
   end
 
   def destroy
