@@ -26,7 +26,7 @@ from within the app's directory in command line:
   rails s
 ```
 
-Database tables:
+Database tables (our db is called " bar_crawl_development " ):
 ```
   List of relations
   Schema |       Name        | Type  |  Owner  
