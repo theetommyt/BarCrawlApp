@@ -76,16 +76,18 @@ class BarsController < ApplicationController
 
   def edit
     @bar = Bar.find(params[:id])
+
   end
   def update
     bar = Bar.find(params[:id])
+
     bar.update!( bar_params )
     redirect_to "/bar/#{ bar.id }"
   end
 
   def destroy
     Bar.destroy(params[:id])
-    redirect_to "/bars"
+    redirect_to "/admin"
   end
 
   private
