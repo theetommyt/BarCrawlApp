@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20150515165203) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.integer  "drinker_id"
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "crawls", force: :cascade do |t|
     t.string   "name"
     t.integer  "shots"
