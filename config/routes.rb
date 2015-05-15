@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get '/drunk' => 'drinkers#index'
   get '/bar-api' => 'bars#api'
 
+
+  post '/sessions' => 'sessions#log_in'
+  delete '/sessions' => 'sessions#log_out'
+
   ###
   get '/admin' => 'admin#index'
   post '/bars' => 'bars#create'

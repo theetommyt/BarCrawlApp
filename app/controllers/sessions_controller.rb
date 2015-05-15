@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def log_in
-    drinker = Drinker.find_by(drinkername: params[:drinkername])
+    drinker = Drinker.find_by(name: params[:drinkername])
     if drinker && drinker.authenticate( params[:password] )
       session[:drinker_id] = drinker.id
       redirect_to "/profile"
@@ -17,11 +17,10 @@ class SessionsController < ApplicationController
   end
 
   def admin
-  if current_user
-    erb :admin
-  else
-    erb :admin_non_authenticated
+    if current_user
+      erb :admin
+    else
+      erb :admin_non_authenticated
+    end
   end
-
-
 end

@@ -29,8 +29,6 @@
   </div>
 
 
-
-
 <script type="text/javascript">
 var app = app || {};
 
@@ -116,7 +114,7 @@ DrunkChat -->
       <!-- form for sign-up: to make a new drinker -->
       <form action="/drinkers" method='post'>
         <%= token_tag %>
-        <input type="text" name='drinker[drinkername]' placeholder='...drinkername'>
+        <input type="text" name='drinker[name]' placeholder='...drinkername'>
         <input type="password" name='drinker[password]' placeholder='...password'>
         <input type="submit" value='Sign-Up'>
       </form>
@@ -130,6 +128,24 @@ DrunkChat -->
       </form>
     </div>
 
+
+    <h3>Chats</h3>
+    <ul class='chats'>
+      <li>
+        <%= form_for @chat do |f| %>
+          <%= f.label :message %>
+          <%= f.text_field :message %>
+          <%= f.submit %>
+        <% end %>
+      </li>
+      <% @chats.reverse.each do |chat| %>
+        <li>
+          <h3>
+            <%= chat.drinker.name %> :   <%= chat.message %>
+          </h3>
+        </li>
+      <% end %>
+    </ul>
 
   </body>
 </html>
