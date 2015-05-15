@@ -299,7 +299,7 @@ ol ul {
   margin: 1.0rem 0 1.0rem 1.0rem;
   font-size: 90%; }
 li {
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid rgba(255,255,255,0.7);
   }
 
 
