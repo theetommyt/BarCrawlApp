@@ -33,7 +33,7 @@ class DrinkersController < ApplicationController
   private
 
   def drinker_params
-    params.require(:drinker).permit(:name, :message)
+    params.require(:drinker).permit(:name, :message, :password)
   end
 
 end

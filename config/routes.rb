@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/bar-api' => 'bars#api'
   #post '/user_location' => 'bars#user_location'
   ##
+  # post '/sign_in' => 'drinkers#sign_in'
   get '/sign_in' => 'drinkers#sign_in'
   get '/profile' => 'drinkers#profile'
 
