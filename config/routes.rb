@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :chats
+
   resources :drinkers
 
   resources :bars
@@ -11,6 +13,12 @@ Rails.application.routes.draw do
   post '/geolocation_getter' => 'yelp#api'
   get '/drunk' => 'drinkers#index'
   get '/bar-api' => 'bars#api'
+
+  ###
+  get '/admin' => 'admin#index'
+  post '/bars' => 'bars#create'
+  delete '/bars/:id' => 'bars#destroy'
+
   #post '/user_location' => 'bars#user_location'
   ##
   # post '/sign_in' => 'drinkers#sign_in'
