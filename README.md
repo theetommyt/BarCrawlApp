@@ -27,16 +27,17 @@ from within the app's directory in command line:
 ```
 
 Database tables:
-List of relations
-Schema |       Name        | Type  |  Owner  
---------+-------------------+-------+---------
-public | bar_distances     | table | Matthew
-public | bars              | table | Matthew
-public | chats             | table | Matthew
-public | crawls            | table | Matthew
-public | drinkers          | table | Matthew
-public | schema_migrations | table | Matthew
-
+```
+  List of relations
+  Schema |       Name        | Type  |  Owner  
+  --------+-------------------+-------+---------
+  public | bar_distances     | table | Matthew
+  public | bars              | table | Matthew
+  public | chats             | table | Matthew
+  public | crawls            | table | Matthew
+  public | drinkers          | table | Matthew
+  public | schema_migrations | table | Matthew
+```
 
 
 
