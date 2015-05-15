@@ -183,7 +183,7 @@ input[type="button"] {
   text-decoration: none;
   white-space: nowrap;
   background-color: rgba(255,255,255,1.0);
-  border: 0;
+  border: 2px solid rgba(241, 196, 15,1.0);
   cursor: pointer;
   box-sizing: border-box;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -238,7 +238,7 @@ select {
   height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #fff;
-  border: 0;
+  border: 2px solid rgba(241, 196, 15,1.0);
   box-shadow: none;
   box-sizing: border-box;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
