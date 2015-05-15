@@ -20,15 +20,16 @@
 
 
 body {
-  background-image: url("dark-wood_body.jpg");
+  background-image: url("bar_background.jpg");
   background-size: cover;
 }
 
 header{
-  background-image: url("wood-background.jpg");
+  background-image: url("wood_header.jpg");
   background-size: cover;
   position: relative;
   margin-top: 25px;
+  margin-bottom: 25px;
   height: 70px;
   width: 99%;
   box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
@@ -38,28 +39,50 @@ header{
 
 #head_text {
   margin-left: 25px;
-  text-shadow: 0px 2px 0px rgba(255, 255, 255, .5);
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, .7);
+}
+
+#location {
+  position: relative;
+  margin-left: 25px;
+}
+
+#or {
+  color:white;
 }
 
 .bar{
-  border: 1px solid red;
-  padding: 1em;
-  background-color: blue;
-  color: white;
+  padding: 1px;
+  background-color: rgba(208, 144, 85, 0.8);
+  color: black;
   text-align: center;
-  border-radius: 5px;
+  text-size: 0.5rem;
+  border-radius: 2px;
 }
 
 .bar-row{
-  border: 2px solid green;
   padding: 1em;
-  background-color: rgba(255,255,255,0.5);
-  width: 90%;
-  border-radius: 5px;
+  background-color: rgba(0,0,0,0.7);
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 4px;
 }
 
 .yesBar {
-  background-color: red;
+  background-color: rgba(255,255,255,0.6);
+}
+
+#drunk_chat {
+  background-color: rgba(0,0,0,0.7);
+  width: 95%;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+.chat_text {
+  color: white;
 }
 
 .chats{
