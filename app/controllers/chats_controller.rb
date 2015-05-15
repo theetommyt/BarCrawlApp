@@ -1,16 +1,13 @@
 class ChatsController < ApplicationController
-  def index
+
+  def create
+
   end
 
-  def new
+  private
+
+  def chat_params
+    params.require(:chat).include(:)
   end
 
-  def edit
-  end
-
-  def show
-  end
-
-  def profile
-  end
 end
