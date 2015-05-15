@@ -1,25 +1,26 @@
 Bar Crawl App
 
 Technology Stack:
-Ruby 2.1.2p95,
-Rails 4.2.1,
-psql (PostgreSQL) 9.4.1
+- Ruby 2.1.2p95,
+- Rails 4.2.1,
+- psql (PostgreSQL) 9.4.1
 
 
 
 Requirements:
-register for an api key from yelp:
+- register for an api key from yelp:
 https://www.yelp.com/developers/manage_api_keys
-Skeleton CSS framework (recommended)
+
+- Skeleton CSS framework (recommended)
 http://getskeleton.com/
- - download and insert both the normalize.css and skeleton.css into your vendor/assets/stylesheets directory.   
+(download and insert both the normalize.css and skeleton.css into your vendor/assets/stylesheets directory)
 
 
 Bar/Tavern information:
 https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses-Current-Liquor-and-Public-Places/nrmj-3kcf
--Filter information
--Download information as CSV
--Drop the CSV into your rails db directory.
+- Filter information
+- Download information as CSV
+- Drop the CSV into your rails db directory.
 
 
 Remember to incorporate changes to the gemfile and bundle.
