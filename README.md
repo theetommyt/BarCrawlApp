@@ -1,5 +1,45 @@
 Bar Crawl App
 
+Technology Stack:
+Ruby 2.1.2p95
+Rails 4.2.1
+psql (PostgreSQL) 9.4.1
+
+
+
+Requirements:
+register for an api key from yelp:
+https://www.yelp.com/developers/manage_api_keys
+
+
+Bar/Tavern information:
+https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses-Current-Liquor-and-Public-Places/nrmj-3kcf
+Filter information, download information as CSV, and drop the CSV into your rails db directory.
+
+
+Remember to incorporate changes to the gemfile and bundle.
+
+
+Testing the app:
+from within the app's directory in command line:
+```
+  rails s
+```
+
+Database tables:
+List of relations
+Schema |       Name        | Type  |  Owner  
+--------+-------------------+-------+---------
+public | bar_distances     | table | Matthew
+public | bars              | table | Matthew
+public | chats             | table | Matthew
+public | crawls            | table | Matthew
+public | drinkers          | table | Matthew
+public | schema_migrations | table | Matthew
+
+
+
+
 This app accepts either a user's current location or a manually entered location and renders options for a bar crawl. The bar options are those that are geographically closest to one another.
 
 The bars are based on a fixed dataset from a list of licensed taverns in Chicago. The Haversine Formula is used to calculate distances between each bar based on latitude and longitude.
@@ -68,9 +108,10 @@ Rails 4.2.1
 * Configuration
 ?
 * Database creation
-?
+rake db:create
 * Database initialization
-
+rake db:migrate
+rake db:seed
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
