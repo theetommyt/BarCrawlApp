@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :chats
+
   resources :drinkers
 
   resources :bars

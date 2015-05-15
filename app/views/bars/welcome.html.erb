@@ -13,8 +13,11 @@
 
 
 
-<button type="button" id="getLocation">We're finna start here</button>
-<input type="text" id="location_search" placeholder="enter address with zip code"><button id="location_searchBtn">Start my search here!</button>
+  <div id="location">
+    <button type="button" id="getLocation">We're finna start here</button>
+    <h2 id="or">or</h2>
+    <input type="text" id="location_search" placeholder="Address + Zip"><button id="location_searchBtn">Finna Start Somewhere Else</button>
+  </div>
 
   <h2 id='position'></h2>
 
@@ -71,8 +74,6 @@ $("#getLocation").click(function() {
   navigator.geolocation.watchPosition(function(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    var html = "Your Current Location is Lat: " + latitude + "    Long: " + longitude;
-    $('#position').html(html);
     app.getBarsAndRender(latitude, longitude);
 
 
@@ -108,25 +109,26 @@ $("#location_searchBtn").click(function() {
 
 <!-- ******************
 DrunkChat -->
+    <div id="drunk_chat">
+      <h2 class="chat_text">Wanna DrunkChat? No Ragrets! Yolo, Yo.</h2>
 
-    <h1>Wanna DrunkChat? No Ragrets! Yolo, Yo.</h1>
+      <h3 class="chat_text">First time, Drinker? Sign up!</h3>
+      <!-- form for sign-up: to make a new drinker -->
+      <form action="/drinkers" method='post'>
+        <%= token_tag %>
+        <input type="text" name='drinker[drinkername]' placeholder='...drinkername'>
+        <input type="password" name='drinker[password]' placeholder='...password'>
+        <input type="submit" value='Sign-Up'>
+      </form>
 
-    <h2>First time, Drinker? Sign up!</h2>
-    <!-- form for sign-up: to make a new drinker -->
-    <form action="/drinkers" method='post'>
-      <%= token_tag %>
-      <input type="text" name='drinker[drinkername]' placeholder='...drinkername'>
-      <input type="password" name='drinker[password]' placeholder='...password'>
-      <input type="submit" value='Sign-Up'>
-    </form>
-
-    <h3>Veteran Drinker? Sign in!</h3>
-    <!-- form for sign-in: to make a new session -->
-    <form action="/sessions" method='post'>
-      <input type="text" name='drinkername' placeholder='...drinkername'>
-      <input type="password" name='password' placeholder='...password'>
-      <input type="submit" value='Sign-In'>
-    </form>
+      <h3 class="chat_text">Veteran Drinker? Sign in!</h3>
+      <!-- form for sign-in: to make a new session -->
+      <form action="/sessions" method='post'>
+        <input type="text" name='drinkername' placeholder='...drinkername'>
+        <input type="password" name='password' placeholder='...password'>
+        <input type="submit" value='Sign-In'>
+      </form>
+    </div>
 
 
   </body>
