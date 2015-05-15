@@ -40,9 +40,12 @@ The bars are based on a fixed dataset from a list of licensed taverns in Chicago
   end
 
 ```
-A user's current latitude and longitude is determined through a navigator.geolocation function, while manually entered latitude and longitudes are obtained with the yelp gem.
+A user's current latitude and longitude is determined through a navigator.geolocation function, while manually entered latitude and longitudes are obtained with the yelp gem. This allows the user to enter not only addresses, but landmarks and more general search terms.
 
 ![Screen Shot](/location.png)
+
+Admin has ability to remove bars from the database, by going to the /admin page:
+![Screen Shot](/admin.png)
 
 == README
 
