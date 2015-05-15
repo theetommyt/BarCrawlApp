@@ -21,7 +21,9 @@
 
 body {
   background-image: url("color_bar.jpg");
+  background-attachment: fixed;
   background-size: cover;
+
 }
 
 header{
@@ -77,18 +79,11 @@ header{
   width: 100%;
   position: relative;
   margin: 0 auto;
+  box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
 }
 
 .chat_text {
   color: black;
   padding: 5px;
   margin: 1px;
-}
-
-.chats{
-  li{
-  color: black;
-  border-top: 1px solid blue;
-  list-style-type: none;
-  }
 }

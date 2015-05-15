@@ -296,10 +296,11 @@ ul ul,
 ul ol,
 ol ol,
 ol ul {
-  margin: 1.5rem 0 1.5rem 3rem;
+  margin: 1.0rem 0 1.0rem 1.0rem;
   font-size: 90%; }
 li {
-  margin-bottom: 1rem; }
+  border-bottom: 1px solid blue;
+  }
 
 
 /* Code
