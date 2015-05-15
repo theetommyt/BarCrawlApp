@@ -34,7 +34,7 @@
 <!-- ******************
 DrunkChat -->
     <div id="drunk_chat">
-      <h4 class="chat_text">Wanna DrunkChat? No Ragrets! Yolo, Yo.</h4>
+      <h5 class="chat_text">Wanna DrunkChat? No Ragrets! Yolo, Yo.</h5>
 
       <p class="chat_text">First time, Drinker? Sign up!</p>
       <!-- form for sign-up: to make a new drinker -->
@@ -57,7 +57,7 @@ DrunkChat -->
 
 
     <div id="drunk_chat">
-    <h4 class="chat_text">Chats</h3>
+    <h5 class="chat_text">Chats</h5>
     <ul>
       <li class="chats">
         <%= form_for @chat do |f| %>
@@ -68,9 +68,9 @@ DrunkChat -->
       </li>
       <% @chats.reverse.each do |chat| %>
         <li>
-          <h3>
+          <p class="chat_text">
             <%= chat.drinker.name %> :   <%= chat.message %>
-          </h3>
+          <p class="chat_text">
         </li>
       <% end %>
     </ul>
