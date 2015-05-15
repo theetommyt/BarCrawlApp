@@ -13,7 +13,9 @@
  *= require_tree .
  *= require_self
  */
-
+body {
+  background-image: url('http://newartcolorz.com/images/bar-wallpaper/kartandtinki1_bar-wallpaper_06.jpg');
+}
 
 .bar{
   border: 1px solid red;
@@ -21,9 +23,10 @@
   background-color: blue;
   color: white;
   text-align: center;
+  border-radius: 5px;
 }
 
-.bar-row{
+.bar-row.two.columns{
   border: 2px solid green;
   padding: 1em;
   background-color: rgba(255,255,255,0.5);
