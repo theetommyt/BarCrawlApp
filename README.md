@@ -1,8 +1,8 @@
 Bar Crawl App
 
 Technology Stack:
-Ruby 2.1.2p95
-Rails 4.2.1
+Ruby 2.1.2p95,
+Rails 4.2.1, 
 psql (PostgreSQL) 9.4.1
 
 
