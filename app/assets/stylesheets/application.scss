@@ -1,0 +1,63 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'fun.scss';
+@import 'normalize.css';
+@import 'skeleton.css';
+
+
+body {
+  background-image: url("dark-wood_body.jpg");
+  background-size: cover;
+}
+
+header{
+  background-image: url("wood-background.jpg");
+  background-size: cover;
+  position: relative;
+  margin-top: 25px;
+  height: 70px;
+  width: 99%;
+  box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+
+}
+
+#head_text {
+  margin-left: 25px;
+  text-shadow: 0px 2px 0px rgba(255, 255, 255, .5);
+}
+
+.bar{
+  border: 1px solid red;
+  padding: 1em;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.bar-row{
+  border: 2px solid green;
+  padding: 1em;
+  background-color: rgba(255,255,255,0.5);
+  width: 90%;
+  border-radius: 5px;
+}
+
+.yesBar {
+  background-color: red;
+}
