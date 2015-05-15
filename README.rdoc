@@ -40,6 +40,8 @@ The bars are based on a fixed dataset from a list of licensed taverns in Chicago
   end
 
 ```
+A user's current latitude and longitude is determined through a navigator.geolocation function, while manually entered latitude and longitudes are obtained with the yelp gem.
+
 
 
 == README

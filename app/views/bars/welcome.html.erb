@@ -102,8 +102,9 @@ $("#location_searchBtn").click(function() {
     <h2>First time, Drinker? Sign up!</h2>
     <!-- form for sign-up: to make a new drinker -->
     <form action="/drinkers" method='post'>
+      <%= token_tag %>
       <input type="text" name='drinker[drinkername]' placeholder='...drinkername'>
-      <input type="password" name='!password' placeholder='...password'>
+      <input type="password" name='drinker[password]' placeholder='...password'>
       <input type="submit" value='Sign-Up'>
     </form>
 
