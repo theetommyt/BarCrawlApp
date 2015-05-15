@@ -14,7 +14,9 @@ https://www.yelp.com/developers/manage_api_keys
 
 Bar/Tavern information:
 https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses-Current-Liquor-and-Public-Places/nrmj-3kcf
-Filter information, download information as CSV, and drop the CSV into your rails db directory.
+-Filter information
+-Download information as CSV
+-Drop the CSV into your rails db directory.
 
 
 Remember to incorporate changes to the gemfile and bundle.
