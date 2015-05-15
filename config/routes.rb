@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'chats/index'
+
+  get 'chats/new'
+
+  get 'chats/edit'
+
+  get 'chats/show'
+
+  get 'chats/profile'
+
   resources :drinkers
 
   resources :bars
