@@ -44,6 +44,12 @@ A user's current latitude and longitude is determined through a navigator.geoloc
 
 ![Screen Shot](/location.png)
 
+Admins can be manually created in the console by adding a "drinker"
+```
+  Drinker.create({name: 'Roger', password: 'password1', is_admin: true})
+```
+
+
 Admin has ability to remove bars from the database, by going to the /admin page:
 ![Screen Shot](/admin.png)
 
