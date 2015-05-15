@@ -16,4 +16,12 @@ class SessionsController < ApplicationController
     redirect_to "/"
   end
 
+  def admin
+  if current_user
+    erb :admin
+  else
+    erb :admin_non_authenticated
+  end
+
+
 end
