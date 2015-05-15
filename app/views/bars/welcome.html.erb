@@ -122,6 +122,7 @@ DrunkChat -->
       <h3 class="chat_text">Veteran Drinker? Sign in!</h3>
       <!-- form for sign-in: to make a new session -->
       <form action="/sessions" method='post'>
+        <%= token_tag %>
         <input type="text" name='drinkername' placeholder='...drinkername'>
         <input type="password" name='password' placeholder='...password'>
         <input type="submit" value='Sign-In'>
