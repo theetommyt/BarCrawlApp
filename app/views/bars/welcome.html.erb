@@ -44,42 +44,51 @@
     });
   }
 
-  $("#getLocation").click(function() {
+  function getLocationClickHandler(){
+    $("#getLocation").click(function() {
 
-    var latitude, longitude;
-    navigator.geolocation.watchPosition(function(position) {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-      app.getBarsAndRender(latitude, longitude);
+      var latitude, longitude;
+      navigator.geolocation.watchPosition(function(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        app.getBarsAndRender(latitude, longitude);
 
+
+      });
 
     });
+  }
 
+  function locationClickHandler(){
+    $("#location_searchBtn").click(function() {
+
+      var location = $('#location_search').val();
+
+      $.ajax({
+        url: '/geolocation_getter',
+        dataType: "json",
+        method: 'post',
+        data: { location: location },
+        success:function(data){
+          app.getBarsAndRender(data.latitude, data.longitude);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    });
+  }
+
+
+  function setClickHandlers(){
+    getLocationClickHandler();
+    locationClickHandler()
+  }
+
+
+  $(document).ready(function(){
+    setClickHandlers();
   });
-
-  $("#location_searchBtn").click(function() {
-
-    var location = $('#location_search').val();
-
-    $.ajax({
-      url: '/geolocation_getter',
-      dataType: "json",
-      method: 'post',
-      data: { location: location },
-      success:function(data){
-        app.getBarsAndRender(data.latitude, data.longitude);
-      },
-      error: function(err) {
-        console.log(err);
-      }
-  });
-
-
-
-  });
-
-
-
 
   </script>
 
