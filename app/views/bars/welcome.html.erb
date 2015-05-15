@@ -29,88 +29,14 @@
   </div>
 
 
-<script type="text/javascript">
-var app = app || {};
 
-app.getBarsAndRender = function(lat, long) {
-  $.ajax({
-    url: '/bar_crawl',
-    dataType: "json",
-    method: 'post',
-    data: { lat: lat, long: long},
-    success:function(data){
-      $('.bar_row').empty();
-      for (var i = 0; i < data.bracket.length; i++) {
-        var row = $('<div>').addClass('bar-row')
-        for (var j = 0; j < data.bracket[i].length; j++) {
-          var bar_name = data.bracket[i][j].name
-          var h3 = $('<span>').addClass('bar').text(bar_name);
-          $(h3).on('click', function(event) {
-            $(this).toggleClass("yesBar");
-          });
-
-          (function(){
-            var local_h3 = h3;
-            var local_bar_name = bar_name;
-            $(local_h3).dblclick( function(event){
-              $('#crawl_list').append('<li>' + local_bar_name + '</li>');
-            });
-          })();
-
-          row.append(h3);
-
-        }
-        $('#bracket').append(row);
-      }
-    }
-  });
-}
-
-$("#getLocation").click(function() {
-
-  var latitude, longitude;
-  navigator.geolocation.watchPosition(function(position) {
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    app.getBarsAndRender(latitude, longitude);
-
-
-  });
-
-});
-
-$("#location_searchBtn").click(function() {
-
-  var location = $('#location_search').val();
-
-  $.ajax({
-    url: '/geolocation_getter',
-    dataType: "json",
-    method: 'post',
-    data: { location: location },
-    success:function(data){
-      app.getBarsAndRender(data.latitude, data.longitude);
-    },
-    error: function(err) {
-    	console.log(err);
-    }
-});
-
-
-
-});
-
-
-
-
-</script>
 
 <!-- ******************
 DrunkChat -->
     <div id="drunk_chat">
-      <h2 class="chat_text">Wanna DrunkChat? No Ragrets! Yolo, Yo.</h2>
+      <h4 class="chat_text">Wanna DrunkChat? No Ragrets! Yolo, Yo.</h4>
 
-      <h3 class="chat_text">First time, Drinker? Sign up!</h3>
+      <p class="chat_text">First time, Drinker? Sign up!</p>
       <!-- form for sign-up: to make a new drinker -->
       <form action="/drinkers" method='post'>
         <%= token_tag %>
@@ -119,7 +45,7 @@ DrunkChat -->
         <input type="submit" value='Sign-Up'>
       </form>
 
-      <h3 class="chat_text">Veteran Drinker? Sign in!</h3>
+      <p class="chat_text">Veteran Drinker? Sign in!</p>
       <!-- form for sign-in: to make a new session -->
       <form action="/sessions" method='post'>
         <%= token_tag %>
@@ -130,9 +56,10 @@ DrunkChat -->
     </div>
 
 
-    <h3>Chats</h3>
-    <ul class='chats'>
-      <li>
+    <div id="drunk_chat">
+    <h4 class="chat_text">Chats</h3>
+    <ul>
+      <li class="chats">
         <%= form_for @chat do |f| %>
           <%= f.label :message %>
           <%= f.text_field :message %>
@@ -147,6 +74,83 @@ DrunkChat -->
         </li>
       <% end %>
     </ul>
+  </div>
 
+
+    <script type="text/javascript">
+    var app = app || {};
+
+    app.getBarsAndRender = function(lat, long) {
+      $.ajax({
+        url: '/bar_crawl',
+        dataType: "json",
+        method: 'post',
+        data: { lat: lat, long: long},
+        success:function(data){
+          $('.bar_row').empty();
+          for (var i = 0; i < data.bracket.length; i++) {
+            var row = $('<div>').addClass('bar-row')
+            for (var j = 0; j < data.bracket[i].length; j++) {
+              var bar_name = data.bracket[i][j].name
+              var h3 = $('<span>').addClass('bar').text(bar_name);
+              $(h3).on('click', function(event) {
+                $(this).toggleClass("yesBar");
+              });
+
+              (function(){
+                var local_h3 = h3;
+                var local_bar_name = bar_name;
+                $(local_h3).dblclick( function(event){
+                  $('#crawl_list').append('<li>' + local_bar_name + '</li>');
+                });
+              })();
+
+              row.append(h3);
+
+            }
+            $('#bracket').append(row);
+          }
+        }
+      });
+    }
+
+    $("#getLocation").click(function() {
+
+      var latitude, longitude;
+      navigator.geolocation.watchPosition(function(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        app.getBarsAndRender(latitude, longitude);
+
+
+      });
+
+    });
+
+    $("#location_searchBtn").click(function() {
+
+      var location = $('#location_search').val();
+
+      $.ajax({
+        url: '/geolocation_getter',
+        dataType: "json",
+        method: 'post',
+        data: { location: location },
+        success:function(data){
+          app.getBarsAndRender(data.latitude, data.longitude);
+        },
+        error: function(err) {
+        	console.log(err);
+        }
+    });
+
+
+
+    });
+
+
+
+
+    </script>
   </body>
 </html>
