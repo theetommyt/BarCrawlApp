@@ -9,6 +9,15 @@
 
   <script type="text/javascript">
   var app = app || {};
+  $("#getLocation").click(function() {
+
+    var latitude, longitude;
+    navigator.geolocation.watchPosition(function(position) {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+      app.getBarsAndRender(latitude, longitude);
+
+
 
   app.getBarsAndRender = function(lat, long) {
     $.ajax({
@@ -44,18 +53,9 @@
     });
   }
 
-  $("#getLocation").click(function() {
-
-    var latitude, longitude;
-    navigator.geolocation.watchPosition(function(position) {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-      app.getBarsAndRender(latitude, longitude);
-
-
-    });
-
   });
+
+});
 
   $("#location_searchBtn").click(function() {
 
