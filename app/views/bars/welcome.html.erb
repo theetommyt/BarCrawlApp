@@ -103,13 +103,14 @@ function performSearch() {
       $("#bar_list").html('');
       infoWindow.setContent(result.name);
       infoWindow.open(map, marker);
-      $('#bar_list').append("<h5 class='bar_li'>" + result.name + "</h5>");
+      $('#bar_list').append("<h5 class='bar_li'>" + result.name + "</h5><h6 class='bar_li'>" + result.vicinity + "<br>Rating: " + result.rating + "<br>" +
+      "<a href='" + result.url +"'>Website</a></h6>");
       console.log("hi");
     });
   });
 
   google.maps.event.addListener(marker, 'dblclick', function() {
-    $('#crawl_list').append("<li class='bar_li'>" + result.name + "</li>");
+    $('#crawl_list').append("<li class='bar_li'>" + result.name + "<br>" + result.vicinity + "</li>");
     scopeHelper(marker);
   });
 
