@@ -1,12 +1,27 @@
-<h3>Welcome back, <%= @drinker.name %>!</h3>
 
-<%= form_tag('/log_out', method: :delete) do %>
-  <%= submit_tag "Log-Out " %>
-<% end %>
+<html>
 
-  <div class="drunk_chat">
-    <p class"chat_text">
-      You're signed in, Back to the crawl!
-      <a href="/"><button type="button" id="BacktoWelcome">Back to the Crawl!</button></a>
-    </p>
-  </div>
+  <head>
+    <title>Drinker Profile Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+
+    <div id ="welcome_text">
+
+      <h3>Well Hellooooooo There,   <%= @drinker.name %> !  Pick Your Poison / Regret: </h3>
+
+
+      <a href="/"><button type="button"
+        id="BacktoWelcome">Back to the DrunkChat n' Crawl!</button></a>
+
+      <%= form_tag('/log_out', method: :delete) do %>
+      <%= submit_tag "Log-Out " %>
+      <% end %>
+
+    </div>
+
+  </body>
+
+</html>
