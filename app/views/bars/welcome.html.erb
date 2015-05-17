@@ -8,6 +8,9 @@
 
 <body>
 
+
+
+
   <script type="text/javascript">
   var app = app || {};
 
@@ -94,11 +97,17 @@
   </script>
 
   <header>
-    <h1 id="head_text">Choose Your Own Disaster</h1>
+    <h1 id="head_text">Choose Your Own Disaster...
+      <% if (@drinker != nil) %>
+        <%= @drinker.name %>
+      <% else %>
+        <%= "guest" %>
+      <% end %>
+
+  </h1>
+
+
   </header>
-
-
-
   <div id="location">
     <button type="button" id="getLocation">We're finna start here</button>
     <h2 id="or">or</h2>
@@ -117,9 +126,6 @@
 
 
 
-
-<!-- ******************
-DrunkChat -->
     <div id="drunk_chat">
       <h5 class="chat_text">Wanna DrunkChat? No Ragrets! Yolo, Yo.</h5>
 
@@ -155,6 +161,7 @@ DrunkChat -->
       </li>
       <% @chats.reverse.each do |chat| %>
         <li>
+
           <p class="chat_text">
             <%= chat.drinker.name %> :   <%= chat.message %>
           <p class="chat_text">

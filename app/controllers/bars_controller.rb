@@ -38,6 +38,7 @@ class BarsController < ApplicationController
     # render welcome page
     @chats = Chat.all.limit(10)
     @chat = Chat.new
+    @drinker = current_user
   end
 
   def closest_bars
