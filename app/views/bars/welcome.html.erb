@@ -30,65 +30,116 @@
 
     var map;
     var infowindow;
+    var service;
+    (41.890550, -87.626847);
+    // radius: 200,
 
     var active = active || {};
     active.markers = [];
 
     function initialize() {
-      var current = new google.maps.LatLng(41.890550, -87.626847);
-
-      map = new google.maps.Map(document.getElementById('map-canvas'), {
-        center: current,
-        zoom: 16
-      });
-
-      var request = {
-        location: current,
-        radius: 200,
-        types: ['bar', 'pub', 'tavern','bars']
-      };
-      infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch(request, callback);
-    }
-
-    function callback(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          createMarker(results[i]);
-        }
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: new google.maps.LatLng(41.890550, -87.626847),
+    zoom: 16,
+    styles: [
+      {
+        stylers: [
+          { visibility: 'simplified' }
+        ]
+      },
+      {
+        elementType: 'labels',
+        stylers: [
+          { visibility: 'off' }
+        ]
       }
+    ]
+  });
+
+  infoWindow = new google.maps.InfoWindow();
+  service = new google.maps.places.PlacesService(map);
+
+  google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+}
+
+function performSearch() {
+  var request = {
+    bounds: map.getBounds(),
+    types: ['bar', 'pub', 'tavern','bars', 'lounge']
+  };
+  service.radarSearch(request, callback);
+}
+    function callback(results, status) {
+    if (status != google.maps.places.PlacesServiceStatus.OK) {
+    alert(status);
+    return;
+    }
+    for (var i = 0, result; result = results[i]; i++) {
+    createMarker(result);
+    }
     }
 
     function createMarker(place) {
-      var placeLoc = place.geometry.location;
-      var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location
-      });
-      active.markers.push(marker);
-
-      var markerLocation = active.length - 1;
-
-      google.maps.event.addListener(marker, 'click', function() {
-        $("#bar_list").html('');
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
-        //want to add place info but refresh when another bar is clicked
-        $('#bar_list').append("<h5 class='bar_li'>" + place.name + "</h5>");
-        console.log("hi")
-      });
-
-      google.maps.event.addListener(marker, 'dblclick', function() {
-        $('#crawl_list').append("<li class='bar_li'>" + place.name + "</li>");
-
-        console.log("insert code to add info below to div");
-        scopeHelper(marker);
-      });
-
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location,
+    icon: {
+      // Star
+      path: 'M 0,-24 6,-7 24,-7 10,4 15,21 0,11 -15,21 -10,4 -24,-7 -6,-7 z',
+      fillColor: '#ffff00',
+      fillOpacity: 1,
+      scale: 1/4,
+      strokeColor: '#bd8d2c',
+      strokeWeight: 1
     }
+  });
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+  google.maps.event.addListener(marker, 'click', function() {
+    service.getDetails(place, function(result, status) {
+      if (status != google.maps.places.PlacesServiceStatus.OK) {
+        alert(status);
+        return;
+      }
+      $("#bar_list").html('');
+      infoWindow.setContent(result.name);
+      infoWindow.open(map, marker);
+      $('#bar_list').append("<h5 class='bar_li'>" + result.name + "</h5>");
+      console.log("hi");
+    });
+  });
+
+  google.maps.event.addListener(marker, 'dblclick', function() {
+    $('#crawl_list').append("<li class='bar_li'>" + result.name + "</li>");
+    scopeHelper(marker);
+  });
+
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    // function createMarker(place) {
+    //   var placeLoc = place.geometry.location;
+    //   var marker = new google.maps.Marker({
+    //     map: map,
+    //     position: place.geometry.location
+    //   });
+    //   active.markers.push(marker);
+    //
+    //   var markerLocation = active.length - 1;
+    //
+    //   google.maps.event.addListener(marker, 'click', function() {
+
+        // infowindow.setContent(place.name, place.address_components.street_address);
+        // infowindow.open(map, this);
+        //want to add place info but refresh when another bar is clicked
+
+
+      // });
+    //
+
+    //
+    // google.maps.event.addDomListener(window, 'load', initialize);
 
     function scopeHelper(scopeObj) {
       console.log(scopeObj);
@@ -138,7 +189,9 @@
 
   <h2 id='position'></h2>
 
-  <div id="map-canvas"></div>
+  <div id="map-canvas">
+  </div>
+
   <div id="list"></div>
 
   <div id="about_bar">
