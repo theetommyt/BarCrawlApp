@@ -54,49 +54,77 @@ header{
   margin-left: 25px;
 }
 
+#getLocation{
+  display: inline-block;
+}
+
 #or {
   color:white;
+  display: inline-block;
 }
 
-span {
-  color: rgba(241, 196, 15,1.0);
-  text-align: center;
-  text-size: 0.25rem;
-  margin: 10 10 0 0;
-  padding: 5px;
-  border: 1px solid rgba(241, 196, 15,1.0);
+#location_search{
+  display: inline-block;
 }
 
-.bar-row{
-  padding: 1em;
-  background-color: rgba(52, 73, 94,1.0);
-  width: 100%;
-  margin: 0px;
-  text-align: center;
-  box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
+#location_searchBtn{
+  display: inline-block;
 }
 
-.yesBar {
-  background-color: rgba(255,255,255,1.0);
-  color: black;
-}
+#map-canvas {
+        height: 400px;
+        width: 350px;
+        position: relative;
+        float:left;
+        margin-top: 0px;
+        margin-bottom: 100px;
+        margin-left: 25px;
+        padding: 0px;
+        border: 5px solid rgba(241, 196, 15,1.0);
+        box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
+      }
 
-#bar_crawl_list{
-  margin-top: 100px;
-  background-color: rgba(52, 73, 94,1.0);
-  width: 100%;
-  box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
+.bar_li{
   font-family: 'Gloria Hallelujah', cursive;
+  color: rgba(241, 196, 15,1.0);
+  padding: 10px;
 }
 
-#crawl_list {
-  padding: 10;
-  margin: 3 0 3 10;
-  color: rgba(241, 196, 15,1.0);
-  font-family: 'Gloria Hallelujah', cursive;
+#about_bar{
+  position: relative;
+  float:right;
+  width: 25%;
+  margin-right:100px;
+  margin-bottom: 25px;
+  background-color: rgba(52, 73, 94,1.0);
+  box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
+    h3{
+      font-family: 'Gloria Hallelujah', cursive;
+      color: rgba(241, 196, 15,1.0);
+      padding-left: 10px;
+      margin-bottom: 0px;
+    }
+}
+
+#current_crawl{
+  position: relative;
+  clear: right;
+  float:right;
+  width: 25%;
+  margin-right:100px;
+  margin-bottom: 15px;
+  background-color: rgba(52, 73, 94,1.0);
+  box-shadow: 0 15px 19px 0 rgba(0, 0, 0, 0.75);
+    h3{
+      font-family: 'Gloria Hallelujah', cursive;
+      color: rgba(241, 196, 15,1.0);
+      padding-left: 10px;
+      margin-bottom: 0px;
+    }
 }
 
 #drunk_chat {
+  clear:both;
   background-color: rgba(52, 73, 94,1.0);
   width: 100%;
   position: relative;
