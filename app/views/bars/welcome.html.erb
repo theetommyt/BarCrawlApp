@@ -110,9 +110,16 @@ function performSearch() {
   });
 
   google.maps.event.addListener(marker, 'dblclick', function() {
+    service.getDetails(place, function(result, status) {
+      if (status != google.maps.places.PlacesServiceStatus.OK) {
+        alert(status);
+        return;
+      }
     $('#crawl_list').append("<li class='bar_li'>" + result.name + "<br>" + result.vicinity + "</li>");
-    scopeHelper(marker);
+    // scopeHelper(marker);
   });
+
+});
 
 
 }
