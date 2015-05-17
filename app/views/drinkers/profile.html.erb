@@ -25,16 +25,13 @@
       <p><%= link_to "New Image", new_image_path %> |
         <%= link_to "View All", images_path %>
       </p>
-<img src="/images/
-
-        <% Image.all.each do |image| %>
-
-        <%= image %>
 
 
-        <% end %>
+    <% Dir.glob('public/uploads/image/file/*/*').map do |path| %>
+      <%= image_tag "#{ Image.all }" %>
+    <% end.reduce(&:+) %>
 
-      " />
+
 
 
     </div>
