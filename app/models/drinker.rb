@@ -4,4 +4,6 @@ class Drinker < ActiveRecord::Base
 
   has_many(:chats)
 
+  has_many(:images)
+
 end

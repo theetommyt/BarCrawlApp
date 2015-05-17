@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :images
   resources :chats
 
   resources :drinkers
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   post '/geolocation_getter' => 'yelp#api'
   get '/drunk' => 'drinkers#index'
   get '/bar-api' => 'bars#api'
-
+  # post '/profile' => 'images#create'
 
   post '/sessions' => 'sessions#log_in'
   delete '/sessions' => 'sessions#log_out'
