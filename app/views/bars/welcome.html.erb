@@ -10,7 +10,7 @@
 <body>
 
 
-
+<!--     Start JS     -->
 
   <script type="text/javascript">
 
@@ -19,15 +19,17 @@
 
 
     $("#getLocation").click(function() {
+      console.log('Hi Tom');
       var latitude, longitude;
       navigator.geolocation.watchPosition(function(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        console.log(latitude, longitude);
+
       });
+
     });
 
-////////     Yelp address to geolcation call     /////
+////////     Yelp address to geolocation call     /////
 
     $("#location_searchBtn").click(function() {
       var location = $('#location_search').val();
@@ -37,7 +39,7 @@
         method: 'post',
         data: { location: location },
         success:function(data){
-          app.getBarsAndRender(data.latitude, data.longitude);
+          console.log(data)
         },
         error: function(err) {
           console.log(err);
@@ -160,6 +162,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
     }
 
   </script>
+
+
+<!--  Root Page Header  -->
 
   <header>
     <h1 id="head_text">Choose Your Own Disaster...
