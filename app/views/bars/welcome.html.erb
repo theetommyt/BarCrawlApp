@@ -13,28 +13,16 @@
 <!--     Start JS     -->
 
   <script type="text/javascript">
-
-
 //////////     JS Geolocation     //////////
-
-
     $("#getLocation").click(function() {
       console.log('Hi Tom');
       var latitude, longitude;
       navigator.geolocation.watchPosition(function(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-      function showPosition(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-      }
-
       });
-
     });
-
 ////////     Yelp address to geolocation call     /////
-
     $("#location_searchBtn").click(function() {
       var location = $('#location_search').val();
       $.ajax({
@@ -50,70 +38,38 @@
         }
       });
     });
-
-
-
-
 ////////     Google Maps Radar Search     ////////
-
+    var map;
+    var infowindow;
+    var service;
+    (41.890550, -87.626847);
+    // radius: 200,
     var active = active || {};
     active.markers = [];
-    // Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see a blank space instead of the map, this
-// is probably because you have denied permission for location sharing.
-
-var map;
-
-function initialize() {
-  var mapOptions = {
-    zoom: 16
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Location found using HTML5.'
-      });
-
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
+/////     GMaps Locate and Render Map     //////
+    function initialize() {
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: new google.maps.LatLng(41.890550, -87.626847),
+    zoom: 16,
+    styles: [
+      {
+        stylers: [
+          { visibility: 'simplified' }
+        ]
+      },
+      {
+        elementType: 'labels',
+        stylers: [
+          { visibility: 'off' }
+        ]
+      }
+    ]
+  });
+  infoWindow = new google.maps.InfoWindow();
+  service = new google.maps.places.PlacesService(map);
+  google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
 }
-
-function handleNoGeolocation(errorFlag) {
-  if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
-  } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
-  }
-
-  var options = {
-    map: map,
-    position: new google.maps.LatLng(60, 105),
-    content: content
-  };
-
-  var infowindow = new google.maps.InfoWindow(options);
-  map.setCenter(options.position);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
 /////     Radar Search for types: drinking places     /////
-
 function performSearch() {
   var request = {
     bounds: map.getBounds(),
@@ -121,9 +77,7 @@ function performSearch() {
   };
   service.radarSearch(request, callback);
 }
-
 /////     GMaps Radar Search Callback with data     /////
-
     function callback(results, status) {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
     alert(status);
@@ -133,9 +87,7 @@ function performSearch() {
     createMarker(result);
     }
     }
-
     ///// Render Markers for drinking places    /////
-
     function createMarker(place) {
   var marker = new google.maps.Marker({
     map: map,
@@ -150,9 +102,7 @@ function performSearch() {
       strokeWeight: 1
     }
   });
-
   ///// Single Click to add place to About Bar Section     /////
-
   google.maps.event.addListener(marker, 'click', function() {
     service.getDetails(place, function(result, status) {
       if (status != google.maps.places.PlacesServiceStatus.OK) {
@@ -167,9 +117,7 @@ function performSearch() {
       console.log("hi");
     });
   });
-
   /////     Double Click to select place to be put on bar crawl list     /////
-
   google.maps.event.addListener(marker, 'dblclick', function() {
     service.getDetails(place, function(result, status) {
       if (status != google.maps.places.PlacesServiceStatus.OK) {
@@ -181,14 +129,11 @@ function performSearch() {
   });
 });
 }
-
 ///// intialize map on window load     /////
-
 google.maps.event.addDomListener(window, 'load', initialize);
     function scopeHelper(scopeObj) {
       console.log(scopeObj);
     }
-
   </script>
 
 
