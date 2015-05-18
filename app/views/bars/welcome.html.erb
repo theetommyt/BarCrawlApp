@@ -13,21 +13,16 @@
 <!--     Start JS     -->
 
   <script type="text/javascript">
-
-
 //////////     JS Geolocation     //////////
-
-
     $("#getLocation").click(function() {
       console.log('Hi Tom');
       var latitude, longitude;
       navigator.geolocation.watchPosition(function(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-
       });
-
     });
+<<<<<<< HEAD
     var loc = function(latitude, longitude)
 ////////     Yelp address to geolocation call     /////
 
@@ -46,10 +41,6 @@
         }
       });
     });
-
-
-
-
 ////////     Google Maps Radar Search     ////////
     var map;
     var infowindow;
@@ -58,8 +49,6 @@
     // radius: 200,
     var active = active || {};
     active.markers = [];
-
-
 /////     GMaps Locate and Render Map     //////
     function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -83,9 +72,7 @@
   service = new google.maps.places.PlacesService(map);
   google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
 }
-
 /////     Radar Search for types: drinking places     /////
-
 function performSearch() {
   var request = {
     bounds: map.getBounds(),
@@ -93,9 +80,7 @@ function performSearch() {
   };
   service.radarSearch(request, callback);
 }
-
 /////     GMaps Radar Search Callback with data     /////
-
     function callback(results, status) {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
     alert(status);
@@ -105,9 +90,7 @@ function performSearch() {
     createMarker(result);
     }
     }
-
     ///// Render Markers for drinking places    /////
-
     function createMarker(place) {
   var marker = new google.maps.Marker({
     map: map,
@@ -122,9 +105,7 @@ function performSearch() {
       strokeWeight: 1
     }
   });
-
   ///// Single Click to add place to About Bar Section     /////
-
   google.maps.event.addListener(marker, 'click', function() {
     service.getDetails(place, function(result, status) {
       if (status != google.maps.places.PlacesServiceStatus.OK) {
@@ -139,9 +120,7 @@ function performSearch() {
       console.log("hi");
     });
   });
-
   /////     Double Click to select place to be put on bar crawl list     /////
-
   google.maps.event.addListener(marker, 'dblclick', function() {
     service.getDetails(place, function(result, status) {
       if (status != google.maps.places.PlacesServiceStatus.OK) {
@@ -153,14 +132,11 @@ function performSearch() {
   });
 });
 }
-
 ///// intialize map on window load     /////
-
 google.maps.event.addDomListener(window, 'load', initialize);
     function scopeHelper(scopeObj) {
       console.log(scopeObj);
     }
-
   </script>
 
 
