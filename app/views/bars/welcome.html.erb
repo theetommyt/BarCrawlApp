@@ -28,10 +28,10 @@
       });
 
     });
-
+    var loc = function(latitude, longitude)
 ////////     Yelp address to geolocation call     /////
 
-    $("#location_searchBtn").click(function() {
+    $('#location_searchBtn').click(function() {
       var location = $('#location_search').val();
       $.ajax({
         url: '/geolocation_getter',
