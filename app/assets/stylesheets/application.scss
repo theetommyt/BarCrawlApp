@@ -164,6 +164,12 @@ header{
   margin: 1px;
 }
 
+@media (max-width: 110px) {
+  #drinker_name{
+    visibility: hidden;
+  }
+}
+
 @media (max-width: 700px) {
   body {
     background-image: url("flat_bar.jpg");

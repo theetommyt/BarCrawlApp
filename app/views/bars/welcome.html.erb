@@ -165,11 +165,12 @@
   <header>
 
     <h1 id="head_text">Choose Your Own Disaster...
-      <p id ="drinker_name"><% if (@drinker != nil) %>
+      <span id ="drinker_name"><% if (@drinker != nil) %>
         <%= @drinker.name %>
       <% else %>
         <%= "guest" %>
-      <% end %></p>
+      <% end %>
+    </span>
 
   </h1>
 
