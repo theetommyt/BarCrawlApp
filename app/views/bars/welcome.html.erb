@@ -13,13 +13,17 @@
 <!--     Start JS     -->
 
   <script type="text/javascript">
+
+  var active = active || {};
+  active.markers = [];
+
 //////////     JS Geolocation     //////////
     $("#getLocation").click(function() {
       console.log('Hi Tom');
       var latitude, longitude;
       navigator.geolocation.watchPosition(function(position) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
+        active.latitude = position.coords.latitude;
+        active.longitude = position.coords.longitude;
       });
     });
 ////////     Yelp address to geolocation call     /////
@@ -41,44 +45,40 @@
 ////////     Google Maps Radar Search     ////////
     var map;
     var infowindow;
-    var service;
-    (41.890550, -87.626847);
-    // radius: 200,
-    var active = active || {};
-    active.markers = [];
+
 /////     GMaps Locate and Render Map     //////
-    function initialize() {
-  map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: new google.maps.LatLng(41.890550, -87.626847),
-    zoom: 16,
-    styles: [
-      {
-        stylers: [
-          { visibility: 'simplified' }
-        ]
-      },
-      {
-        elementType: 'labels',
-        stylers: [
-          { visibility: 'off' }
-        ]
-      }
-    ]
-  });
-  infoWindow = new google.maps.InfoWindow();
-  service = new google.maps.places.PlacesService(map);
-  google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
-}
+  function initialize() {
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+      center: new google.maps.LatLng(41.890550, -87.626847),
+      zoom: 16,
+      styles: [
+        {
+          stylers: [
+            { visibility: 'simplified' }
+          ]
+        },
+        {
+          elementType: 'labels',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        }
+      ]
+    });
+    infoWindow = new google.maps.InfoWindow();
+    service = new google.maps.places.PlacesService(map);
+    google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+  }
 /////     Radar Search for types: drinking places     /////
-function performSearch() {
-  var request = {
-    bounds: map.getBounds(),
-    types: ['bar', 'pub', 'tavern','bars', 'lounge']
-  };
-  service.radarSearch(request, callback);
-}
+  function performSearch() {
+    var request = {
+      bounds: map.getBounds(),
+      types: ['bar', 'pub', 'tavern','bars', 'lounge']
+    };
+    service.radarSearch(request, callback);
+  }
 /////     GMaps Radar Search Callback with data     /////
-    function callback(results, status) {
+  function callback(results, status) {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
     alert(status);
     return;
@@ -88,8 +88,8 @@ function performSearch() {
     }
     }
     ///// Render Markers for drinking places    /////
-    function createMarker(place) {
-  var marker = new google.maps.Marker({
+  function createMarker(place) {
+    var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location,
     icon: {
@@ -113,7 +113,7 @@ function performSearch() {
       infoWindow.setContent(result.name);
       infoWindow.open(map, marker);
       $('#bar_list').append("<h5 class='bar_li'>" + result.name + "</h5><h6 class='bar_li'>" + result.vicinity + "<br>Rating: " + result.rating + "<br>" +
-      "<a href='" + result.url +"' target='_blank'>Website</a></h6>");
+      "<a href='" + result.url +"' target='_blank'>More Info</a></h6>");
       console.log("hi");
     });
   });
@@ -130,11 +130,11 @@ function performSearch() {
 });
 }
 ///// intialize map on window load     /////
-google.maps.event.addDomListener(window, 'load', initialize);
+  google.maps.event.addDomListener(window, 'load', initialize);
     function scopeHelper(scopeObj) {
       console.log(scopeObj);
     }
-  </script>
+</script>
 
 
 <!--  Root Page Header  -->
