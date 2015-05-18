@@ -14,42 +14,72 @@
 
   <script type="text/javascript">
 
+  $(document).ready(function() {
+    //////////     JS Geolocation     //////////
+        $("#getLocation").on("click", function() {
+          console.log('Hi Tom');
+          console.log(active);
+          navigator.geolocation.watchPosition(function(position) {
+            initialize(active.latitude, active.longitude);
+            active.latitude = position.coords.latitude;
+            active.longitude = position.coords.longitude;
+          });
+        });
+    ////////     Yelp address to geolocation call     /////
+        $("#location_searchBtn").click(function() {
+          var location = $('#location_search').val();
+          $.ajax({
+            url: '/geolocation_getter',
+            dataType: "json",
+            method: 'post',
+            data: { location: location },
+            success:function(data){
+              console.log(data)
+              var lat = data.latitude;
+              var long = data.longitude;
+              active.map = new google.maps.Map(document.getElementById('map-canvas'), {
+
+                center: new google.maps.LatLng(lat, long),
+                zoom: 16,
+                styles: [
+                  {
+                    stylers: [
+                      { visibility: 'simplified' }
+                    ]
+                  },
+                  {
+                    elementType: 'labels',
+                    stylers: [
+                      { visibility: 'off' }
+                    ]
+                  }
+                ]
+              });
+              performSearch();
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          });
+        });
+  });
+
   var active = active || {};
   active.markers = [];
 
-//////////     JS Geolocation     //////////
-    $("#getLocation").click(function() {
-      console.log('Hi Tom');
-      var latitude, longitude;
-      navigator.geolocation.watchPosition(function(position) {
-        active.latitude = position.coords.latitude;
-        active.longitude = position.coords.longitude;
-      });
-    });
-////////     Yelp address to geolocation call     /////
-    $("#location_searchBtn").click(function() {
-      var location = $('#location_search').val();
-      $.ajax({
-        url: '/geolocation_getter',
-        dataType: "json",
-        method: 'post',
-        data: { location: location },
-        success:function(data){
-          console.log(data)
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      });
-    });
+
 ////////     Google Maps Radar Search     ////////
-    var map;
     var infowindow;
 
 /////     GMaps Locate and Render Map     //////
-  function initialize() {
-    map = new google.maps.Map(document.getElementById('map-canvas'), {
-      center: new google.maps.LatLng(41.890550, -87.626847),
+  function initialize(lat, long) {
+    var lat = lat || 41.890550;
+    var long = long || -87.626847;
+    console.log(lat);
+    console.log(long);
+    active.map = new google.maps.Map(document.getElementById('map-canvas'), {
+
+      center: new google.maps.LatLng(lat, long),
       zoom: 16,
       styles: [
         {
@@ -66,13 +96,13 @@
       ]
     });
     infoWindow = new google.maps.InfoWindow();
-    service = new google.maps.places.PlacesService(map);
-    google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+    service = new google.maps.places.PlacesService(active.map);
+    google.maps.event.addListenerOnce(active.map, 'bounds_changed', performSearch);
   }
 /////     Radar Search for types: drinking places     /////
   function performSearch() {
     var request = {
-      bounds: map.getBounds(),
+      bounds: active.map.getBounds(),
       types: ['bar', 'pub', 'tavern','bars', 'lounge']
     };
     service.radarSearch(request, callback);
@@ -80,7 +110,7 @@
 /////     GMaps Radar Search Callback with data     /////
   function callback(results, status) {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
-    alert(status);
+    //alert(status);
     return;
     }
     for (var i = 0, result; result = results[i]; i++) {
@@ -90,7 +120,7 @@
     ///// Render Markers for drinking places    /////
   function createMarker(place) {
     var marker = new google.maps.Marker({
-    map: map,
+    map: active.map,
     position: place.geometry.location,
     icon: {
       // Star
@@ -111,7 +141,7 @@
       }
       $("#bar_list").html('');
       infoWindow.setContent(result.name);
-      infoWindow.open(map, marker);
+      infoWindow.open(active.map, marker);
       $('#bar_list').append("<h5 class='bar_li'>" + result.name + "</h5><h6 class='bar_li'>" + result.vicinity + "<br>Rating: " + result.rating + "<br>" +
       "<a href='" + result.url +"' target='_blank'>More Info</a></h6>");
       console.log("hi");
@@ -154,7 +184,7 @@
 
   </header>
   <div id="location">
-    <button type="button" id="getLocation">We're finna start here</button>
+    <input type="submit" id="getLocation" value="We're finna start here">
     <h3 id="or">or</h3>
     <input type="text" id="location_search" placeholder="Address + Zip">
     <button id="location_searchBtn">Finna Start Somewhere Else</button>
