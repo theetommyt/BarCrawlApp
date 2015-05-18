@@ -1,3 +1,5 @@
+require 'rails/generators'
+
 class Bar < ActiveRecord::Base
 
   has_many :bar_distances, foreign_key: :start_bar_id

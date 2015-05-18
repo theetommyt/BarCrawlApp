@@ -1,3 +1,5 @@
+require 'rails/generators'
+
 class Crawl < ActiveRecord::Base
 
   # Adds a bar to the crawl
