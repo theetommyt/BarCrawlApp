@@ -14,6 +14,7 @@ require "sprockets/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'rails/generators'
 
 Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
       config.assets.paths << path
