@@ -10,6 +10,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
+    @images = Dir.glob("images/*")
   end
 
   # GET /images/new

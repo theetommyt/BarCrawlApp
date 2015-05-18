@@ -13,20 +13,83 @@
 
 
   <script type="text/javascript">
+  var app = app || {};
+  app.getBarsAndRender = function(lat, long) {
+    $.ajax({
+      url: '/bar_crawl',
+      dataType: "json",
+      method: 'post',
+      data: { lat: lat, long: long},
+      success:function(data){
+        $('.bar_row').empty();
+        for (var i = 0; i < data.bracket.length; i++) {
+          var row = $('<div>').addClass('bar-row')
+          for (var j = 0; j < data.bracket[i].length; j++) {
+            var bar_name = data.bracket[i][j].name
+            var h3 = $('<span>').addClass('bar'[i]).text(bar_name);
+            $(h3).on('click', function(event) {
+              $(this).toggleClass("yesBar");
+            });
+            (function(){
+              var local_h3 = h3;
+              var local_bar_name = bar_name;
+              $(local_h3).dblclick( function(event){
+                $('#crawl_list').append('<li>' + local_bar_name + '</li>');
+              });
+            })();
+            row.append(h3);
+          }
+          $('#bracket').append(row);
+        }
+      }
+    });
+  }
 
-
-
+  function getLocationClickHandler(){
     $("#getLocation").click(function() {
 
       var latitude, longitude;
       navigator.geolocation.watchPosition(function(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-
+        app.getBarsAndRender(latitude, longitude);
 
       });
 
     });
+  }
+
+  function locationClickHandler(){
+    $("#location_searchBtn").click(function() {
+      var location = $('#location_search').val();
+      $.ajax({
+        url: '/geolocation_getter',
+        dataType: "json",
+        method: 'post',
+        data: { location: location },
+        success:function(data){
+          app.getBarsAndRender(data.latitude, data.longitude);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    });
+  }
+
+
+  function setClickHandlers(){
+    getLocationClickHandler();
+    locationClickHandler()
+  }
+
+
+  $(document).ready(function(){
+    setClickHandlers();
+  });
+
+
+
 
     var map;
     var infowindow;
