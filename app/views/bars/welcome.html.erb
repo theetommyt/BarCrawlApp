@@ -13,7 +13,6 @@
 <!--     Start JS     -->
 
   <script type="text/javascript">
-
   $(document).ready(function() {
     //////////     JS Geolocation     //////////
         $("#getLocation").on("click", function() {
@@ -38,7 +37,6 @@
               var lat = data.latitude;
               var long = data.longitude;
               active.map = new google.maps.Map(document.getElementById('map-canvas'), {
-
                 center: new google.maps.LatLng(lat, long),
                 zoom: 16,
                 styles: [
@@ -63,14 +61,10 @@
           });
         });
   });
-
   var active = active || {};
   active.markers = [];
-
-
 ////////     Google Maps Radar Search     ////////
     var infowindow;
-
 /////     GMaps Locate and Render Map     //////
   function initialize(lat, long) {
     var lat = lat || 41.890550;
@@ -78,7 +72,6 @@
     console.log(lat);
     console.log(long);
     active.map = new google.maps.Map(document.getElementById('map-canvas'), {
-
       center: new google.maps.LatLng(lat, long),
       zoom: 15,
       styles: [
