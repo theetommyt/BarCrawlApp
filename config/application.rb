@@ -15,7 +15,6 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 require 'rails/generators'
 
-
 Bundler.require(*Rails.groups)
 
 Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
