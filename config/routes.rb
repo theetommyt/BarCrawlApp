@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :bars
 
+  root 'bars#welcome'
+
   # requestType '/pathToMap' => 'controller#controllerMethod'
   post '/closest_bars' => 'bars#closest_bars'
   get '/bar_crawl' => 'bars#bar_crawl'
@@ -33,7 +35,6 @@ Rails.application.routes.draw do
   post 'log_in' => 'sessions#log_in'
   delete 'log_out' => 'sessions#log_out'
   ##
-  root 'bars#welcome'
 
   # get 'drinkers/index'
   #
