@@ -24,42 +24,6 @@
             active.longitude = position.coords.longitude;
           });
         });
-    ////////     Yelp address to geolocation call     /////
-        $("#location_searchBtn").click(function() {
-          var location = $('#location_search').val();
-          $.ajax({
-            url: '/geolocation_getter',
-            dataType: "json",
-            method: 'post',
-            data: { location: location },
-            success:function(data){
-              console.log(data)
-              var lat = data.latitude;
-              var long = data.longitude;
-              active.map = new google.maps.Map(document.getElementById('map-canvas'), {
-                center: new google.maps.LatLng(lat, long),
-                zoom: 16,
-                styles: [
-                  {
-                    stylers: [
-                      { visibility: 'simplified' }
-                    ]
-                  },
-                  {
-                    elementType: 'labels',
-                    stylers: [
-                      { visibility: 'off' }
-                    ]
-                  }
-                ]
-              });
-              performSearch();
-            },
-            error: function(err) {
-              console.log(err);
-            }
-          });
-        });
   });
   var active = active || {};
   active.markers = [];
